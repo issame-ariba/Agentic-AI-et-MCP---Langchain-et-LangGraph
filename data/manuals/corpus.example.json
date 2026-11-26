@@ -1,0 +1,22 @@
+[
+  {
+    "manual_id": "PX-200-DEMO",
+    "title": "Fiche de démonstration synthétique PX-200 (non officielle)",
+    "record_kind": "DEMO_ONLY",
+    "pages": [
+      {
+        "page": 1,
+        "text": "DONNÉES FICTIVES POUR LE TP — ce document n'est pas un manuel constructeur et ne décrit pas un vrai appareil. Dans ce scénario pédagogique uniquement, le pictogramme triangulaire accompagné d'un voyant orange clignotant signifie que le bac papier est mal enclenché. La vérification de démonstration consiste à contrôler que le bac est inséré correctement. Ne pas utiliser cette indication pour dépanner un appareil réel."
+      }
+    ],
+    "figures": [
+      {
+        "figure_id": "img_px200_01",
+        "page": 1,
+        "caption": "Illustration synthétique créée pour le TP : pictogramme triangulaire et voyant orange. Ce fichier n'est pas une photo réelle du PX-200.",
+        "image_path": "data/demo_assets/img_px200_01_demo.png",
+        "record_kind": "DEMO_ONLY"
+      }
+    ]
+  }
+]

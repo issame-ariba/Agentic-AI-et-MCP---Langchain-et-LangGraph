@@ -1,0 +1,115 @@
+{
+  "name": "Agent MCP Streamable HTTP",
+  "nodes": [
+    {
+      "parameters": {
+        "public": false
+      },
+      "id": "7b70bd47-6dd7-4e15-8d76-5c6371725a91",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        260,
+        300
+      ],
+      "webhookId": "c07c2b40-5ba0-4e9d-9e29-e804d7920343"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "Tu es un agent de démonstration MCP. Utilise les outils disponibles pour répondre et précise lorsque les données sont fictives. Pour une question sur Sami Demo, appelle get_employee_infos."
+        }
+      },
+      "id": "b57c0b9f-6ec7-4b6c-9007-66e76ea42386",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        520,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "endpointUrl": "http://mcp-demo:24000/mcp",
+        "serverTransport": "httpStreamable",
+        "authentication": "none",
+        "include": "all",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "2a1cf425-9ce2-4c28-adcf-0f65d0800a8c",
+      "name": "MCP Client Tool",
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.4,
+      "position": [
+        760,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "llama-3.3-70b-versatile"
+        },
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "id": "965429fc-8725-440a-8faa-35327e971f86",
+      "name": "Groq Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        300,
+        500
+      ]
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}
